@@ -1,0 +1,19 @@
+$size: 200px;
+
+main {
+  display: grid;
+  grid-template-columns: $size $size $size;
+  grid-gap: 0px;
+}
+
+app-square {
+  border: 1px solid #dbdbdb;
+  height: $size;
+
+  button {
+    font-size: $size - 50px;
+    height: 100%;
+    width: 100%;
+    display: block;
+  }
+}

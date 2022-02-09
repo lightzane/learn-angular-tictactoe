@@ -1,0 +1,26 @@
+<ng-container *ngIf="winner; else showCurrentPlayer">
+  <h1>Player {{ winner }} won the game !</h1>
+</ng-container>
+<ng-template #showCurrentPlayer>
+  <h2>Current Player: {{ currentPlayer }}</h2>
+</ng-template>
+
+<div style="display: flex">
+  <main>
+    <app-square
+      *ngFor="let square of squares; let i = index"
+      [value]="square"
+      (click)="makeMove(i)">
+    </app-square>
+  </main>
+  <ol>
+    <li *ngFor="let h of history; let i = index">
+      <ng-container *ngIf="i === 0; else showHistory">
+        <button (click)="newGame()">Start new Game</button>
+      </ng-container>
+      <ng-template #showHistory>
+        <button (click)="jumpTo(i)">Go to move # {{ i }}</button>
+      </ng-template>
+    </li>
+  </ol>
+</div>
