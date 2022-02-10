@@ -46,13 +46,20 @@ export class BoardComponent implements OnInit {
     if (!this.squares[id] && !this.winner) {
 
       // Get a copy of specific history in timeline starting from 0 to current stepNumber
-      const history = this.history.slice(0, this.stepNumber + 1); // ! TIMELINE FRAGILE: Use "slice" to create a copy and prevent mutating the original array
+      const history = this.history.slice(0, this.stepNumber + 1); // ! TIMELINE FRAGILE: Use "slice" to clone a portion of an array and prevent mutating the original array (the past)
 
       // Get the present Board Content
       const current = history[history.length - 1];
 
       // Refer squares from the present
-      const squares = current.squares.slice(); // ! TIMELINE FRAGILE: Use "slice" to create a copy and prevent mutating the past
+      const squares = [...current.squares]; // ! TIMELINE FRAGILE: Use "slice" or "spread operator" to create a clone and prevent mutating the original array (the past)
+
+      /**
+       * Slice vs Spread Operator
+       * Both can clone an array
+       * 
+       * But if you want to clone a portion of an array, use slice($start, $end)
+       */
 
       // Record latest move by player and add it to the squares
       squares.splice(id, 1, this.currentPlayer);
